@@ -1,0 +1,16 @@
+let
+ var i: Integer;
+ var j: Integer;
+ var k: Integer;
+ var num: Integer
+in
+begin
+    i := 0;
+    putint(i);
+    repeat
+        begin
+            i := i + 1;
+            putint(i);
+        end
+    until i >= 10;
+end

@@ -260,7 +260,20 @@ public class Parser {
       }
       break;
 
-    case Token.WHILE:
+
+      case Token.REPEAT:
+        acceptIt();
+        commandAST = parseSingleCommand();
+        accept(Token.UNTIL);
+        Expression expressionAST = parseExpression();
+        finish(commandPos);
+        commandAST = new RepeatCommand(commandAST, expressionAST, commandPos);
+        break;
+
+
+
+
+      case Token.WHILE:
       {
         acceptIt();
         Expression eAST = parseExpression();

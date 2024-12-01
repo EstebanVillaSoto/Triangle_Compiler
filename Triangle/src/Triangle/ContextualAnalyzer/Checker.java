@@ -105,6 +105,21 @@ public final class Checker implements Visitor {
     return null;
   }
 
+  @Override
+  public Object visitRepeatCommand(RepeatCommand ast, Object o) {
+    // Verificar que la expresión sea de tipo booleano
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    if (!eType.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected in 'until'", "", ast.E.position);
+    }
+
+    // Verificar que el comando sea válido
+    ast.C.visit(this, null);
+
+    return null; // No retorna ningún valor
+  }
+
+
   public Object visitCaseCommand(CaseCommand ast, Object o) {
     idTable.openScope();
     ast.E.visit(this, null);
